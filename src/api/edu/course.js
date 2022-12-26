@@ -14,5 +14,24 @@ export default {
             url: '/eduservice/teacher/findAll',
             method: 'get'
           })
-    }
+    },
+    getCourseInfoById(id) {
+        return request({
+            url: `/eduservice/course/getCourseInfo/${id}`,
+            method: 'get'
+          })
+    },
+    updateCourseInfo(courseInfo) {
+        return request({
+            url: `/eduservice/course/updateCourseInfo`,
+            method: 'post',
+            data: courseInfo
+          })
+    },
+    getPublishCourseInfo(courseId) {
+        return request({
+            url: `/eduservice/course/getPublishCourseInfo/${courseId}`,
+            method: 'get'
+          })
+    },
 }

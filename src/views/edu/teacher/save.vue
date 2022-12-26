@@ -115,7 +115,14 @@ export default {
       if (this.$route.params && this.$route.params.id) {
         this.getInfo(this.$route.params.id);
       } else {
-        this.teacher = {};
+        this.teacher = {
+        name: '',
+        sort: 0,
+        level: 1,
+        career: '',
+        intro: '',
+        avatar: ''
+      };
       }
     },
     getInfo(id) {
