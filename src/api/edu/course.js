@@ -34,4 +34,18 @@ export default {
             method: 'get'
           })
     },
+    publishCourseInfo(courseId) {
+        return request({
+            url: `/eduservice/course/publishCourse/${courseId}`,
+            method: 'post'
+          })
+    },
+    getCoursePageList(current, size, courseQuery){
+        return request({
+            url: `/eduservice/course/pageCourseCondition/${current}/${size}`,
+            method: 'post',
+            data: courseQuery
+        })
+    }
+
 }
