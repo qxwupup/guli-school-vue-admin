@@ -58,8 +58,16 @@
           {{ scope.row.level === 1 ? "高级讲师" : "首席讲师" }}
         </template>
       </el-table-column>
-
-      <el-table-column prop="intro" label="资历" />
+      <!-- <el-table-column prop="intro" label="资历" > -->
+      <el-table-column prop="intro" label="资历" >
+        <template slot-scope="scope">
+          <el-tooltip popper-class='table-tooltip' :content="scope.row.intro" placement="top">
+            <div class="long_title">
+              <span>{{scope.row.intro}}</span>
+            </div>
+          </el-tooltip>
+        </template>
+      </el-table-column>
 
       <el-table-column prop="gmtCreate" label="添加时间" width="160" />
 
@@ -174,3 +182,11 @@ export default {
   },
 };
 </script>
+<style lang="css" >
+  .table-tooltip{font-size: 12px; max-width:50% }
+  .long_title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>

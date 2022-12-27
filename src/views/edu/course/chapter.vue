@@ -84,7 +84,25 @@
       </el-radio-group>
     </el-form-item>
     <el-form-item label="上传视频">
-      <!-- TODO -->
+        <el-upload
+            :on-success="handleVodUploadSuccess"
+            :on-remove="handleVodRemove"
+            :before-remove="beforeVodRemove"
+            :on-exceed="handleUploadExceed"
+            :file-list="fileList"
+            :action="BASE_API+'/eduvod/video/uploadAlyiVideo'"
+            :limit="1"
+            class="upload-demo">
+        <el-button size="small" type="primary">上传视频</el-button>
+        <el-tooltip placement="right-end">
+            <div slot="content">最大支持5MB,<br>
+                支持3GP、ASF、AVI、DAT、DV、FLV、F4V、<br>
+                GIF、M2T、M4V、MJ2、MJPEG、MKV、MOV、MP4、<br>
+                MPE、MPG、MPEG、MTS、OGG、QT、RM、RMVB、<br>
+                SWF、TS、VOB、WMV、WEBM 等视频格式上传</div>
+            <i class="el-icon-question"/>
+        </el-tooltip>
+        </el-upload>
     </el-form-item>
   </el-form>
   <div slot="footer" class="dialog-footer">
@@ -118,7 +136,8 @@ export default {
         title: '',
         sort: 0,
         isFree: false,
-        videoSourceId: ''
+        videoSourceId: '',
+        videoOriginalName: '',
       },
     };
   },

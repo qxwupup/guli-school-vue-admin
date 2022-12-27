@@ -1,6 +1,13 @@
 import request from '@/utils/request'
 
 export default {
+    getAllTeacher() {
+        return request({
+            //url: '/eduservice/teacher/pageTeacherCondition/'+current+"/"+size,
+            url: `/eduservice/teacher/findAll`,
+            method: 'get'
+        })
+    },
     getTeacherListPage(current, size, teacherQuery) {
         return request({
             //url: '/eduservice/teacher/pageTeacherCondition/'+current+"/"+size,
