@@ -126,7 +126,6 @@ export default {
     getAllTeacherList(){
       teacher.getAllTeacher().then(response=>{
         this.teacherList = response.data.items
-        console.log(this.teacherList)
       })
     },
     //查询所有的一级分类
@@ -144,7 +143,6 @@ export default {
         .then((response) => {
           this.list = response.data.rows;
           this.total = response.data.total;
-          console.log(this.list)
         })
         .catch((error) => {
           console.log(error);

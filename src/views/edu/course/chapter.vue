@@ -90,7 +90,7 @@
             :before-remove="beforeVodRemove"
             :on-exceed="handleUploadExceed"
             :file-list="fileList"
-            :action="BASE_API+'/eduvod/video/uploadAlyiVideo'"
+            :action="BASE_API+'/eduvod/video/uploadVideo'"
             :limit="1"
             class="upload-demo">
         <el-button size="small" type="primary">上传视频</el-button>
@@ -139,6 +139,10 @@ export default {
         videoSourceId: '',
         videoOriginalName: '',
       },
+
+      fileList:[],
+      BASE_API:process.env.BASE_API
+
     };
   },
   created() {
@@ -148,11 +152,39 @@ export default {
     }
   },
   methods: {
+    //上传视频成功调用的方法
+    handleVodUploadSuccess(response, file, fileList) {
+        //上传视频id赋值
+        this.video.videoSourceId = response.data.videoId
+        //上传视频名称赋值
+        this.video.videoOriginalName = file.name
+    },
+    handleUploadExceed() {
+        this.$message.warning('想要重新上传视频，请先删除已上传的视频')
+    },
+    handleVodRemove(file, fileList){
+      video.deleteRemoteVideo(this.video.videoSourceId).then(response=>{
+        this.$message({
+                type: "success",
+                message: "删除视频成功!",
+              });
+              this.fileList=[]
+              this.video.videoSourceId = ''
+              //上传视频名称赋值
+              this.video.videoOriginalName = ''
+      })
+    },
+    beforeVodRemove(file, fileList){
+      return this.$confirm(`确定移除 ${ file.name }?`);
+    },
     //===========================================小节操作=========================================
     openEditVideo(videoId){
       this.dialogVideoFormVisible = true
         video.getVideo(videoId).then(response=>{
           this.video = response.data.video
+          if(this.video.videoOriginalName){
+              this.fileList=[{name:this.video.videoOriginalName}]
+          }
         })
     },
     removeVideo(videoId){
@@ -214,6 +246,7 @@ export default {
       this.video.title=''
       this.video.sort=0
       this.video.isFree=false
+      this.fileList=[]
       this.video.chapterId=chapterId
       this.dialogVideoFormVisible=true
     },

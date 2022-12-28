@@ -31,5 +31,11 @@ export default {
             method: 'delete'
           })
     },
+    deleteRemoteVideo(videoId) {
+        return request({
+            url: `/eduvod/video/remove/${videoId}`,
+            method: 'delete'
+          })
+    },
 
 }
